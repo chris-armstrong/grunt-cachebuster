@@ -85,6 +85,11 @@ module.exports = function(grunt) {
               key = path.relative(basedir, filename);
             }
 
+            // Convert the path to a UNIX separator, regardless of OS
+            var key_parts = key.split(path.sep);
+            //grunt.log.write('joining path elements', key_parts);
+            key = path.posix.join.apply(path.posix, key_parts);
+
             hashes[key] = hash;
           }
         } else {
